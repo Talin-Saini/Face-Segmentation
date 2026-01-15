@@ -81,6 +81,9 @@ Using RLE:
 
 DeepLabV3 significantly outperforms U-Net, demonstrating the advantage of atrous convolution and multi-scale context aggregation for face segmentation on portrait images.
 
+<img width="1017" height="343" alt="image" src="https://github.com/user-attachments/assets/340a67cb-4a3d-42a8-80ca-89e346bb5ab5" />
+
+
 ---
 
 
