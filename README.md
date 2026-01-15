@@ -8,9 +8,9 @@ The project uses **Run-Length Encoding (RLE)** for mask representation and decod
 ## Overview
 
 Face segmentation is a pixel-wise classification task where each pixel is labeled as **face** or **background**.  
-This project compares a classical encoder–decoder network (**U-Net**) with a modern semantic segmentation model (**DeepLabV3**) for accurate face region segmentation in portrait images.
+This project compares a classical encoder–decoder segmentation network (**U-Net**) with a modern semantic segmentation model (**DeepLabV3**) for accurate face region segmentation in portrait images.
 
-Mask annotations provided in **RLE format** are decoded on-the-fly inside the notebooks to generate binary segmentation masks.
+Ground truth masks are provided in **RLE format** and are decoded on-the-fly inside the notebooks to generate binary segmentation masks.
 
 ---
 
@@ -20,8 +20,8 @@ Mask annotations provided in **RLE format** are decoded on-the-fly inside the no
 - **Task:** Binary face segmentation  
 - **Annotation Format:** Run-Length Encoding (RLE)
 
-> ⚠️ The dataset is not included in this repository.  
-> Please download it separately and update the dataset path inside the notebooks.
+> ⚠️ The dataset is **not included** in this repository.  
+> Please download it separately and update the dataset paths inside the notebooks.
 
 ---
 
@@ -34,11 +34,10 @@ Mask annotations provided in **RLE format** are decoded on-the-fly inside the no
 
 Each notebook includes:
 - RLE mask decoding
-- Data preprocessing and augmentation
-- Model definition
+- Data preprocessing
+- Model architecture definition
 - Training and validation
-- Evaluation using standard segmentation metrics
-- Visualization of predictions
+- Evaluation and qualitative visualization
 
 ---
 
@@ -47,61 +46,42 @@ Each notebook includes:
 ### U-Net
 - Encoder–decoder architecture with skip connections
 - Trained from scratch
-- Suitable for precise boundary segmentation
+- Strong performance on fine-grained boundaries
 
 ### DeepLabV3
-- Atrous convolution-based segmentation
-- ASPP module for multi-scale context
-- Optional pretrained backbone
+- Atrous convolution-based semantic segmentation
+- ASPP module for multi-scale context aggregation
+- Superior global context understanding
 
 ---
 
-## Mask Encoding
+## Mask Encoding (RLE)
 
-Ground truth segmentation masks are stored using **Run-Length Encoding (RLE)**.  
-RLE strings are decoded into binary masks before being fed into the segmentation models.
+Segmentation masks are stored using **Run-Length Encoding (RLE)** and decoded into binary masks before being used for training and evaluation.
 
-This approach:
-- Reduces storage size
-- Is commonly used in segmentation challenges and datasets
-- Allows efficient mask reconstruction during training
+Using RLE:
+- Reduces annotation storage size
+- Is standard in many segmentation datasets and challenges
+- Enables efficient mask handling
 
 ---
 
-## Evaluation Metrics
+## Evaluation Metric
 
-- Intersection over Union (IoU)
-- Dice Coefficient
-- Pixel Accuracy
+- **RLE Score** (higher is better)
 
 ---
 
 ## Results
 
-| Model     | IoU  | Dice | Pixel Accuracy |
-|-----------|------|------|----------------|
-| U-Net     | XX.X | XX.X | XX.X           |
-| DeepLabV3 | XX.X | XX.X | XX.X           |
+| Model     | RLE Score |
+|-----------|-----------|
+| U-Net     | **0.9371** |
+| DeepLabV3 | **0.9875** |
 
-Qualitative results and prediction visualizations are available within the notebooks.
-
----
-
-## Requirements
-
-Typical dependencies:
-- Python 3.x
-- PyTorch
-- torchvision
-- numpy
-- matplotlib
-- opencv-python
-- tqdm
+DeepLabV3 significantly outperforms U-Net, demonstrating the advantage of atrous convolution and multi-scale context aggregation for face segmentation on portrait images.
 
 ---
 
-## Usage
 
-Open and run the notebooks sequentially:
-```bash
 jupyter notebook
